@@ -7,6 +7,7 @@ import (
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 type Code struct {
@@ -31,6 +32,17 @@ func SaveGameSession(conn MongoDBConnectionInterface, session *GameSession) erro
 	// Set up the collection and insert the object.
 	coll := conn.GetClient().Database("passcode").Collection("game_sessions")
 	_, err := coll.InsertOne(ctx, session)
+	return err
+}
+
+func UpdateGameSession(conn MongoDBConnectionInterface, session *GameSession) error {
+	// Create a context with a timeout.
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+
+	// Set up the collection and insert the object.
+	coll := conn.GetClient().Database("passcode").Collection("game_sessions")
+	_, err := coll.ReplaceOne(ctx, bson.M{"session_id": session.SessionID}, session, options.Replace().SetUpsert(true))
 	return err
 }
 

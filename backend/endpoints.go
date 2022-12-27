@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"reflect"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -32,10 +33,28 @@ func PostCheckGuess(c *gin.Context) {
 		return
 	}
 
-	// TODO: Add code to get session and check for correctness
+	session, err := GetGameSession(conn, request.SessionID)
+	if err != nil {
+		c.JSON(400, fmt.Sprintf("Failed to get session: %s", err))
+		return
+	}
+
+	if !ValidateGuess(Code{Values: request.Guess}) {
+		c.JSON(400, "invalid guess")
+		return
+	}
+
+	session.Guesses = append(session.Guesses, Code{Values: request.Guess})
+
+	result := CheckGuess(Code{Values: request.Guess}, session.Passcode)
+	if reflect.DeepEqual(result, []string{"correct", "correct", "correct", "correct"}) {
+		session.Completed = true
+	}
+
+	UpdateGameSession(conn, session)
 
 	response := GuessResponse{
-		Result: []string{"correct", "incorrect", "incorrect", "incorrect"},
+		Result: result,
 	}
 
 	c.JSON(200, response)

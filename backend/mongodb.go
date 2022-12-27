@@ -9,7 +9,6 @@ import (
 )
 
 type MongoDBConnectionInterface interface {
-	Connect() error
 	GetClient() *mongo.Client
 	TestConnection() error
 }
@@ -45,11 +44,6 @@ func NewMongoDBConnection(username, password, baseUrl string) (*MongoDBConnectio
 
 func (conn *MongoDBConnection) GetClient() *mongo.Client {
 	return conn.client
-}
-
-func (conn *MongoDBConnection) Connect() error {
-	// Connect to the MongoDB server
-	return nil
 }
 
 func (conn *MongoDBConnection) TestConnection() error {

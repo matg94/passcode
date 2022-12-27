@@ -1,4 +1,4 @@
-module github.com/matg94/passcode/user-service
+module github.com/matg94/passcode/backend
 
 go 1.19
 
