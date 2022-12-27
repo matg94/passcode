@@ -89,3 +89,15 @@ func PostCreateGame(c *gin.Context) {
 
 	c.JSON(http.StatusOK, session.SessionID)
 }
+
+func GetGameSessionState(c *gin.Context) {
+	sessionID := c.Param("sessionID")
+
+	session, err := GetGameSession(conn, sessionID)
+	if err != nil {
+		c.JSON(400, fmt.Sprintf("Failed to get session: %s", err))
+		return
+	}
+
+	c.JSON(200, &session)
+}

@@ -22,5 +22,6 @@ func SetupServer() {
 	router.Use(cors.Default())
 	router.POST("/check-guess", PostCheckGuess)
 	router.POST("/create-game", PostCreateGame)
+	router.GET("/game-state/:sessionID", GetGameSessionState)
 	router.Run()
 }
