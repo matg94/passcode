@@ -101,3 +101,24 @@ func GetGameSessionState(c *gin.Context) {
 
 	c.JSON(200, &session)
 }
+
+func GetGuesses(c *gin.Context) {
+	sessionID := c.Param("sessionID")
+
+	session, err := GetGameSession(conn, sessionID)
+	if err != nil {
+		c.JSON(400, fmt.Sprintf("Failed to get session: %s", err))
+		return
+	}
+
+	var results []ParsedGuess
+
+	for _, guess := range session.Guesses {
+		results = append(results, ParsedGuess{
+			Guess:  guess.Values,
+			Result: CheckGuess(guess, session.Passcode),
+		})
+	}
+
+	c.JSON(200, &results)
+}

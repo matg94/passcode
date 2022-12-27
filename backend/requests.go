@@ -8,3 +8,8 @@ type GuessRequest struct {
 type GuessResponse struct {
 	Result []string
 }
+
+type ParsedGuess struct {
+	Guess  []int
+	Result []string
+}
