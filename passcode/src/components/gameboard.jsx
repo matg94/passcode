@@ -1,13 +1,11 @@
-import { Button } from '@mui/material';
-import { Card, Box, Grid } from '@mui/material';
 import {useState} from 'react';
-import InputTiles from './inputtiles'
-import Keyboard from './keyboard'
 import axios from 'axios';
+import Logs from './logs'
+import PasscodeBoard from './passcodeboard';
 
 
 const containerDivStyle = {
-  width: "100%",
+  width: "90%",
   height: "100%",
 }
 
@@ -16,6 +14,8 @@ function GameBoard(props) {
   const [currentGuess, setCurrentGuess] = useState(["_", "_", "_", "_"])
   const [currentIndex, setCurrentIndex] = useState(0)
   const [lastGuessResult, setLastGuessResult] = useState(["normal", "normal", "normal", "normal"])
+  const [showingLogs, setShowingLogs] = useState(false);
+  const [lastFiveLogs, setLastFiveLogs] = useState([]);
 
   const onSubmitGuess = () => {
     axios
@@ -25,15 +25,37 @@ function GameBoard(props) {
       })
       .then(res => {
         setLastGuessResult(res.data.Result)
+        logGuess(currentGuess, res.data.Result)
       })
   }
+
+  const logGuess = (guess, result) => {
+    let newLogs = lastFiveLogs
+    if (lastFiveLogs.length >= 5) {
+      newLogs.shift()
+    }
+    newLogs.push({
+      guess: guess,
+      result: result
+    })
+    setLastFiveLogs(newLogs)
+    console.log(newLogs)
+  }
+
   
+  const clearGuess = () => {
+    setCurrentGuess(["_", "_", "_", "_"])
+    setCurrentIndex(0)
+    setLastGuessResult((["normal", "normal", "normal", "normal"]))
+  }
+
   const buttonOnClick = (value) => {
+    console.log(currentGuess)
     if (value == "ok") {
       if (currentIndex != 4) {
         return
       }
-      onSubmitGuess(currentGuess)
+      onSubmitGuess()
       return
     }
     
@@ -62,16 +84,28 @@ function GameBoard(props) {
     setCurrentIndex(currentIndex + 1)
   }
 
-  return (
-    <Grid container alignItems="center" justifyContent="center" style={containerDivStyle}>
-      <Grid item xs={12}>
-        <InputTiles guessResult={lastGuessResult} guess={currentGuess}></InputTiles>
-      </Grid>
-      <Grid item xs={6} alignSelf="center">
-        <Keyboard buttonOnClick={buttonOnClick}></Keyboard>
-      </Grid>
-    </Grid>
-  );
+  const displayLogs = () => {
+    return <Logs 
+        onExit={() => setShowingLogs(false)}
+        logs={lastFiveLogs}
+      />
+  }
+
+  const displayGameBoard = () => {
+    return <PasscodeBoard 
+          lastGuessResult={lastGuessResult}
+          clearGuess={clearGuess}
+          currentGuess={currentGuess}
+          setShowingLogs={() => setShowingLogs(true)}
+          onExit={props.onExit}
+          buttonOnClick={buttonOnClick}
+        />
+  }
+
+  if (showingLogs) {
+    return displayLogs()
+  }
+  return displayGameBoard()
 }
 
 export default GameBoard;

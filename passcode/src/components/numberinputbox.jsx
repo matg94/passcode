@@ -20,8 +20,8 @@ function NumberInputBox(props) {
   let boxStyle = {
     minWidth: "30px",
     maxWidth: "40px",
-    minHeight: "20px",
-    maxHeight: "40px",
+    minHeight: "25px",
+    maxHeight: "30px",
     alignItems: "center",
     justifyContent: "center",
     margin: "10px",
@@ -46,7 +46,7 @@ function NumberInputBox(props) {
 
   return (
     <Card style={boxStyle}>
-        <h1 style={numberStyle}>{props.value ? props.value : "_"}</h1>
+        <h1 style={numberStyle}>{props.value || props.value == 0 ? props.value : "_"}</h1>
     </Card>
   );
 }

@@ -9,7 +9,7 @@ function GameTile() {
 
   return (
     gameStarted ?
-      <GameBoard sessionID={123}/>
+      <GameBoard onExit={() => setGameStarted(false)} sessionID={123}/>
       : <Button 
           variant="contained" 
           disableElevation 

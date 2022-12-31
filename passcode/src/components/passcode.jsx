@@ -16,10 +16,9 @@ const mainCardStyle = {
   display: "flex",
   flexDirection: "center",
   margin: "30px",
-  minWidth: 350,
-  maxWidth: 500,
-  minHeight: 600,
-  maxHeight: 1000,
+  minWidth: 400,
+  maxWidth: 450,
+  height: 550
 }
 
 const titleStyle = {

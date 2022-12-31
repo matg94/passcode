@@ -6,30 +6,35 @@ import NumberInputBox from './numberinputbox';
 
 
 const buttonStyle = {
-  width: "50px",
-  height: "40px",
+  minWidth: "90%",
+  maxWidth: "100%",
+  height: "80%",
 }
 
 const itemStyle = {
   alignItems: "center",
   justifyContent: "center",
   height: "50px",
-  width: "50px",
   display: "flex",
 }
 
 
 function Keyboard(props) {
-
  
   const createButton = (value) => {
-    let color = value == "<" || value == "ok" ? "secondary" : "primary"
+    let color = "primary"
+    if (value == "ok") {
+      color = "success"
+    }
+    if (value == "<") {
+      color = "secondary"
+    }
     return (
       <Grid style={itemStyle} item xs={4}>
-        <Button style={buttonStyle} variant="contained" disableElevation color={color} onClick={() => props.buttonOnClick(value)}>
+        <Button style={buttonStyle} disabled={props.guess.includes(value)} variant="contained" disableElevation color={color} onClick={() => props.buttonOnClick(value)}>
           {value}
         </Button>
-    </Grid>
+      </Grid>
     )
   }
 
