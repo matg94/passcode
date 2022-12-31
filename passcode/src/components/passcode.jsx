@@ -23,7 +23,8 @@ const mainCardStyle = {
 
 const titleStyle = {
   textAlign: "center",
-  fontSize: "clamp(32px, 8vw, 64px)"
+  fontSize: "clamp(32px, 8vw, 64px)",
+  color: "#d79921",
 }
 
 function Passcode() {
