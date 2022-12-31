@@ -1,8 +1,5 @@
 import { Button } from '@mui/material';
-import { Card, Box, Grid } from '@mui/material';
-import {useState} from 'react';
-import GameBoard from './gameboard'
-import GameTile from './gametile';
+import { Grid } from '@mui/material';
 import InputTiles from './inputtiles';
 
 const containerDivStyle = {

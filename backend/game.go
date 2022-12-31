@@ -1,6 +1,10 @@
 package main
 
-import "strconv"
+import (
+	"math/rand"
+	"strconv"
+	"time"
+)
 
 func CheckGuess(guess Code, passcode Code) []string {
 	results := make([]string, len(guess.Values))
@@ -51,4 +55,30 @@ func ValidateGuess(guess Code) bool {
 	}
 
 	return true
+}
+
+func GenerateRandomPasscode() []int {
+	// Seed the random number generator with the current time
+	rand.Seed(time.Now().UnixNano())
+
+	passcode := make([]int, 4)
+
+	for i := 0; i < 4; i++ {
+		rand := rand.Intn(10)
+
+		found := false
+		for _, num := range passcode {
+			if num == rand {
+				i--
+			}
+		}
+
+		if found {
+			continue
+		}
+
+		passcode[i] = rand
+	}
+
+	return passcode
 }

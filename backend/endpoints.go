@@ -78,7 +78,7 @@ func PostCreateGame(c *gin.Context) {
 		UserID:    userID,
 		Completed: false,
 		Timestamp: time.Now(),
-		Passcode:  Code{Values: []int{1, 2, 3, 4}},
+		Passcode:  Code{Values: GenerateRandomPasscode()},
 		Guesses:   []Code{},
 	}
 
