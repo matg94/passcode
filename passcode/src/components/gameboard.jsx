@@ -2,6 +2,8 @@ import {useState} from 'react';
 import axios from 'axios';
 import Logs from './logs'
 import PasscodeBoard from './passcodeboard';
+import { useEffect } from 'react';
+import uuid from 'react-uuid';
 
 
 const containerDivStyle = {
@@ -16,12 +18,32 @@ function GameBoard(props) {
   const [lastGuessResult, setLastGuessResult] = useState(["normal", "normal", "normal", "normal"])
   const [showingLogs, setShowingLogs] = useState(false);
   const [lastFiveLogs, setLastFiveLogs] = useState([]);
+  const [sessionID, setSessionID] = useState("");
+  
+  const userID = uuid()
+
+  useEffect(() => {
+    if (sessionID == "") {
+      axios
+        .post("http://localhost:8080/create-game", {},
+          {
+            headers: {
+              'X-User-ID': userID,
+              'Content-Type': "application/json",
+            }
+          })
+        .then(res => {
+          setSessionID(res.data)
+        })
+    }
+  }, [])
 
   const onSubmitGuess = () => {
+    console.log(sessionID)
     axios
       .post("http://localhost:8080/check-guess", {
         "guess": currentGuess,
-        "sessionID": "2563db02-b38f-4ab2-a266-f328836d8990"
+        "sessionID": sessionID
       })
       .then(res => {
         setLastGuessResult(res.data.Result)

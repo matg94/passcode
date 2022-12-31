@@ -19,7 +19,10 @@ func main() {
 
 func SetupServer() {
 	router := gin.Default()
-	router.Use(cors.Default())
+	config := cors.DefaultConfig()
+	config.AllowHeaders = append(config.AllowHeaders, "X-User-ID")
+	config.AllowAllOrigins = true
+	router.Use(cors.New(config))
 	router.POST("/check-guess", PostCheckGuess)
 	router.POST("/create-game", PostCreateGame)
 	router.GET("/game-state/:sessionID", GetGameSessionState)

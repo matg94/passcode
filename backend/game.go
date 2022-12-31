@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"math/rand"
 	"strconv"
 	"time"
@@ -64,21 +65,22 @@ func GenerateRandomPasscode() []int {
 	passcode := make([]int, 4)
 
 	for i := 0; i < 4; i++ {
-		rand := rand.Intn(10)
+		randomNumber := rand.Intn(10)
 
-		found := false
+		invalidNumber := false
 		for _, num := range passcode {
-			if num == rand {
-				i--
+			if randomNumber == num {
+				// go back to start
+				invalidNumber = true
 			}
 		}
-
-		if found {
+		if invalidNumber {
+			i--
 			continue
 		}
 
-		passcode[i] = rand
+		passcode[i] = randomNumber
 	}
-
+	fmt.Println(passcode)
 	return passcode
 }
