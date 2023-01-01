@@ -21,11 +21,9 @@ function Logs(props) {
                     guess={guess}
                 />
             })}
-            <Grid item xs={12}>
-                <div style={{display: "flex", justifyContent: "center", width: "100%"}} >
-                    <Button style={{width: "33%"}} onClick={props.onExit} disableElevation variant="contained" color="success">Exit</Button>
-                </div>  
-            </Grid>
+            <div style={{display: "flex", justifyContent: "center", width: "100%"}} >
+                <Button style={{width: "33%"}} onClick={props.onExit} disableElevation variant="contained" color="success">Exit</Button>
+            </div>  
         </Grid>
     );
 }

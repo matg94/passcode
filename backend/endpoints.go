@@ -54,7 +54,8 @@ func PostCheckGuess(c *gin.Context) {
 	UpdateGameSession(conn, session)
 
 	response := GuessResponse{
-		Result: result,
+		Result:    result,
+		Completed: session.Completed,
 	}
 
 	c.JSON(200, response)

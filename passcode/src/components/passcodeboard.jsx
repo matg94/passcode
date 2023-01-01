@@ -1,14 +1,22 @@
 import { Button } from '@mui/material';
-import { Card, Box, Grid } from '@mui/material';
-import {useState} from 'react';
+import { Grid, Card } from '@mui/material';
 import InputTiles from './inputtiles'
 import Keyboard from './keyboard'
-import axios from 'axios';
 
 
 const containerDivStyle = {
   width: "90%",
   height: "100%",
+}
+
+const statisticsStyle = {
+  width: "100%",
+  height: "100%",
+  justifyContent: "center",
+  alignItems: "center",
+  display: "flex",
+  flexDirection: "column",
+  background: "#504945",
 }
 
 function PasscodeBoard(props) {

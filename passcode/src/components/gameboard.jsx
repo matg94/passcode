@@ -4,12 +4,8 @@ import Logs from './logs'
 import PasscodeBoard from './passcodeboard';
 import { useEffect } from 'react';
 import uuid from 'react-uuid';
+import VictoryBoard from './victoryBoard';
 
-
-const containerDivStyle = {
-  width: "90%",
-  height: "100%",
-}
 
 function GameBoard(props) {
 
@@ -19,13 +15,16 @@ function GameBoard(props) {
   const [showingLogs, setShowingLogs] = useState(false);
   const [lastFiveLogs, setLastFiveLogs] = useState([]);
   const [sessionID, setSessionID] = useState("");
-  
+  const [gameCompleted, setGameCompleted] = useState(false);
+  const [attempts, setAttempts] = useState(0);
+
   const userID = uuid()
+  const url = process.env.REACT_APP_BACKEND_BASE_URL
 
   useEffect(() => {
     if (sessionID == "") {
       axios
-        .post("http://localhost:8080/create-game", {},
+        .post(`${url}/create-game`, {},
           {
             headers: {
               'X-User-ID': userID,
@@ -40,13 +39,15 @@ function GameBoard(props) {
 
   const onSubmitGuess = () => {
     axios
-      .post("http://localhost:8080/check-guess", {
+      .post(`${url}/check-guess`, {
         "guess": currentGuess,
         "sessionID": sessionID
       })
       .then(res => {
         setLastGuessResult(res.data.Result)
+        setGameCompleted(res.data.Completed)
         logGuess(currentGuess, res.data.Result)
+        setAttempts(attempts + 1)
       })
   }
 
@@ -90,7 +91,6 @@ function GameBoard(props) {
         let newResult = lastGuessResult
         newResult[currentIndex - 1] = "normal"
         setLastGuessResult(newResult)
-        console.log(lastFiveLogs)
         return
       }
       return
@@ -118,14 +118,27 @@ function GameBoard(props) {
           lastGuessResult={lastGuessResult}
           clearGuess={clearGuess}
           currentGuess={currentGuess}
+          gameCompleted={gameCompleted}
           setShowingLogs={() => setShowingLogs(true)}
           onExit={props.onExit}
           buttonOnClick={buttonOnClick}
         />
   }
 
+  const displayVictoryBoard = () => {
+    return <VictoryBoard
+          passcode={currentGuess}
+          setShowingLogs={() => setShowingLogs(true)}
+          attempts={attempts}
+          onExit={props.onExit}
+        />
+  }
+
   if (showingLogs) {
     return displayLogs()
+  }
+  if (gameCompleted) {
+    return displayVictoryBoard()
   }
   return displayGameBoard()
 }

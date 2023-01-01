@@ -1,7 +1,4 @@
-import { Button } from '@mui/material';
 import { Card, Box, Grid } from '@mui/material';
-import {useState} from 'react';
-import GameBoard from './gameboard'
 import NumberInputBox from './numberinputbox';
 
 

@@ -6,7 +6,8 @@ type GuessRequest struct {
 }
 
 type GuessResponse struct {
-	Result []string
+	Result    []string
+	Completed bool
 }
 
 type ParsedGuess struct {
