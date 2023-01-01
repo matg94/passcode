@@ -28,7 +28,6 @@ function GameTile() {
                 disableElevation 
                 color="secondary" 
                 onClick={() => setGameStarted(true)}
-                endGameFunction={() => setGameStarted(false)}
               >
                 Start New Game
               </Button>

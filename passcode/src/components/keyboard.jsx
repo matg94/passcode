@@ -30,7 +30,7 @@ function Keyboard(props) {
       color = "secondary"
     }
     return (
-      <Grid style={itemStyle} item xs={4}>
+      <Grid key={value} style={itemStyle} item xs={4}>
         <Button style={buttonStyle} disabled={props.guess.includes(value)} variant="contained" disableElevation color={color} onClick={() => props.buttonOnClick(value)}>
           {value}
         </Button>

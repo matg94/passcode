@@ -39,7 +39,6 @@ function GameBoard(props) {
   }, [])
 
   const onSubmitGuess = () => {
-    console.log(sessionID)
     axios
       .post("http://localhost:8080/check-guess", {
         "guess": currentGuess,
@@ -52,16 +51,17 @@ function GameBoard(props) {
   }
 
   const logGuess = (guess, result) => {
+    let storedGuess = [...guess]
+    let storedResult = [...result]
     let newLogs = lastFiveLogs
     if (lastFiveLogs.length >= 5) {
       newLogs.shift()
     }
     newLogs.push({
-      guess: guess,
-      result: result
+      guess: storedGuess,
+      result: storedResult
     })
     setLastFiveLogs(newLogs)
-    console.log(newLogs)
   }
 
   
@@ -72,7 +72,6 @@ function GameBoard(props) {
   }
 
   const buttonOnClick = (value) => {
-    console.log(currentGuess)
     if (value == "ok") {
       if (currentIndex != 4) {
         return
@@ -80,7 +79,7 @@ function GameBoard(props) {
       onSubmitGuess()
       return
     }
-    
+
     if (value == "<") {
       if (currentIndex > 0) {
         let newGuess = currentGuess
@@ -91,6 +90,7 @@ function GameBoard(props) {
         let newResult = lastGuessResult
         newResult[currentIndex - 1] = "normal"
         setLastGuessResult(newResult)
+        console.log(lastFiveLogs)
         return
       }
       return
