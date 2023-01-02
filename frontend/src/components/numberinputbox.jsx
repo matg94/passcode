@@ -1,5 +1,6 @@
 import { Button } from '@mui/material';
 import { Card, Box, Grid } from '@mui/material';
+import { useEffect } from 'react';
 import {useState} from 'react';
 import GameBoard from './gameboard'
 
@@ -7,12 +8,14 @@ const colors = {
   red: "#cc241d",
   yellow: "#d79921",
   green: "#98971a",
-  normal: "#504945"
+  normal: "#504945",
+  light_foreground: "#fbf1c7",
+  dark_foreground: "#1d2021"
 }
 
 const numberStyle = {
     textAlign: "center",
-    fontSize: "clamp(16px, 6vw, 32px)"
+    fontSize: "clamp(16px, 6vw, 32px)",
 }
 
 function NumberInputBox(props) {
@@ -42,7 +45,16 @@ function NumberInputBox(props) {
     }
   }
 
+  const getFontColor = (state) => {
+    console.log(state)
+    if (state == "normal") {
+      return colors.light_foreground
+    }
+    return colors.dark_foreground
+  }
+
   boxStyle.background = getColor(props.state)
+  boxStyle.color = getFontColor(props.state)  
 
   return (
     <Card style={boxStyle}>

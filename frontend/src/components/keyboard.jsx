@@ -11,10 +11,9 @@ const buttonStyle = {
 const itemStyle = {
   alignItems: "center",
   justifyContent: "center",
-  height: "50px",
+  height: "60px",
   display: "flex",
 }
-
 
 function Keyboard(props) {
  
