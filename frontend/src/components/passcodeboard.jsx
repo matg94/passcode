@@ -9,14 +9,10 @@ const containerDivStyle = {
   height: "100%",
 }
 
-const statisticsStyle = {
-  width: "100%",
-  height: "100%",
-  justifyContent: "center",
-  alignItems: "center",
+const keyboardGridStyle = {
   display: "flex",
-  flexDirection: "column",
-  background: "#504945",
+  height: "30px",
+  border: "solid red",
 }
 
 function PasscodeBoard(props) {
@@ -35,8 +31,8 @@ function PasscodeBoard(props) {
         </Grid>
         <Grid item xs={3}/>
         <Grid item xs={12}/>
-        <Grid item xs={6}>
-            <Keyboard guess={props.currentGuess} buttonOnClick={props.buttonOnClick}></Keyboard>
+        <Grid style={{keyboardGridStyle}} item xs={8}>
+          <Keyboard guess={props.currentGuess} buttonOnClick={props.buttonOnClick}></Keyboard>
         </Grid>
         <div style={{display: "flex", justifyContent: "center", width: "100%", marginTop: "30px"}} >
             <Button style={{width: "33%"}} onClick={props.onExit} disableElevation variant="contained" color="success">Exit</Button>
