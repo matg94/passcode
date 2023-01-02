@@ -8,7 +8,7 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -o /passcode-app
+RUN go build
 
 FROM node:19.2.0 AS node-build
 
@@ -19,7 +19,9 @@ WORKDIR /passcode/frontend
 
 RUN npm install && npm run build
 
-FROM alpine
+FROM golang:1.19-alpine
+
+WORKDIR /app
 
 COPY --from=go-build \
     /passcode \
@@ -29,4 +31,4 @@ COPY --from=node-build \
     /passcode/build \
     /app/build/
 
-CMD ["/app/passcode-app"]
+CMD ["/app/passcode"]
