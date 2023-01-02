@@ -7,15 +7,9 @@ import (
 	"time"
 )
 
-const (
-	username = "passcode"
-	password = "passcode"
-	baseUrl  = "192.168.50.155"
-)
-
 func TestMongoDBConnection(t *testing.T) {
 
-	conn, err := NewMongoDBConnection(username, password, baseUrl)
+	conn, err := NewMongoDBConnection("mongodb://passcode:passcode@192.168.50.155")
 	if err != nil {
 		t.Errorf("Error creating MongoDBConnection: %v", err)
 	}

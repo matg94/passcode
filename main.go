@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 )
 
@@ -24,9 +25,10 @@ func SetupServer() {
 	config.AllowHeaders = append(config.AllowHeaders, "X-User-ID")
 	config.AllowAllOrigins = true
 	router.Use(cors.New(config))
+	router.Use(static.Serve("/", static.LocalFile("./build", true)))
 	router.POST("/check-guess", PostCheckGuess)
 	router.POST("/create-game", PostCreateGame)
 	router.GET("/game-state/:sessionID", GetGameSessionState)
 	router.GET("/guesses/:sessionID", GetGuesses)
-	router.Run()
+	router.Run(":5000")
 }

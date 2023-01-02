@@ -19,12 +19,12 @@ function GameBoard(props) {
   const [attempts, setAttempts] = useState(0);
 
   const userID = uuid()
-  const url = process.env.REACT_APP_BACKEND_BASE_URL
+
 
   useEffect(() => {
     if (sessionID == "") {
       axios
-        .post(`${url}/create-game`, {},
+        .post(`/create-game`, {},
           {
             headers: {
               'X-User-ID': userID,
@@ -39,7 +39,7 @@ function GameBoard(props) {
 
   const onSubmitGuess = () => {
     axios
-      .post(`${url}/check-guess`, {
+      .post(`/check-guess`, {
         "guess": currentGuess,
         "sessionID": sessionID
       })
