@@ -15,6 +15,7 @@ const colors = {
 
 const numberStyle = {
     textAlign: "center",
+    padding: "2px",
     fontSize: "clamp(16px, 6vw, 32px)",
 }
 
@@ -22,15 +23,15 @@ function NumberInputBox(props) {
 
   let boxStyle = {
     minWidth: "15px",
-    maxWidth: "15px",
+    maxWidth: "25px",
     minHeight: "15px",
-    maxHeight: "15px",
+    maxHeight: "25px",
     alignItems: "center",
     justifyContent: "center",
     margin: "5px",
     marginTop: "20px",
     marginBottom: "10px",
-    padding: "21px",
+    padding: "15px",
     display: "flex",
   }
 

@@ -3,15 +3,16 @@ import { Grid } from '@mui/material';
 
 
 const buttonStyle = {
-  minWidth: "90%",
-  maxWidth: "100%",
-  height: "80%",
+  minWidth: "85%",
+  maxWidth: "95%",
+  minHeight: "85%",
+  maxHeight: "95%",
 }
 
 const itemStyle = {
   alignItems: "center",
   justifyContent: "center",
-  height: "60px",
+  minHeight: "60px",
   display: "flex",
 }
 

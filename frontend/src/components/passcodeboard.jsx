@@ -9,12 +9,6 @@ const containerDivStyle = {
   height: "100%",
 }
 
-const keyboardGridStyle = {
-  display: "flex",
-  height: "30px",
-  border: "solid red",
-}
-
 function PasscodeBoard(props) {
 
   return (
@@ -31,7 +25,7 @@ function PasscodeBoard(props) {
         </Grid>
         <Grid item xs={3}/>
         <Grid item xs={12}/>
-        <Grid style={{keyboardGridStyle}} item xs={8}>
+        <Grid item xs={8}>
           <Keyboard guess={props.currentGuess} buttonOnClick={props.buttonOnClick}></Keyboard>
         </Grid>
         <div style={{display: "flex", justifyContent: "center", width: "100%", marginTop: "30px"}} >
