@@ -30,5 +30,5 @@ func SetupServer() {
 	router.POST("/create-game", PostCreateGame)
 	router.GET("/game-state/:sessionID", GetGameSessionState)
 	router.GET("/guesses/:sessionID", GetGuesses)
-	router.Run(":5000")
+	router.Run()
 }

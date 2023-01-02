@@ -19,14 +19,14 @@ WORKDIR /passcode/frontend
 
 RUN npm install && npm run build
 
-FROM scratch
+FROM alpine
 
 COPY --from=go-build \
     /passcode \
     /app
 
 COPY --from=node-build \
-    /passcode/frontend/build \
+    /passcode/build \
     /app/build/
 
 CMD ["/app/passcode-app"]
