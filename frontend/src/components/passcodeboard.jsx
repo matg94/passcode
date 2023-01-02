@@ -5,7 +5,7 @@ import Keyboard from './keyboard'
 
 
 const containerDivStyle = {
-  width: "90%",
+  width: "100%",
   height: "100%",
 }
 

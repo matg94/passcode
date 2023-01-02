@@ -35,7 +35,7 @@ func ValidateGuess(guess Code) bool {
 	// Create a map to store the count of each number.
 	counts := make(map[int]int)
 
-	if len(guess.Values) != 4 {
+	if len(guess.Values) != 6 {
 		return false
 	}
 
@@ -62,9 +62,9 @@ func GenerateRandomPasscode() []int {
 	// Seed the random number generator with the current time
 	rand.Seed(time.Now().UnixNano())
 
-	passcode := make([]int, 4)
+	passcode := make([]int, 6)
 
-	for i := 0; i < 4; i++ {
+	for i := 0; i < 6; i++ {
 		randomNumber := rand.Intn(10)
 
 		invalidNumber := false

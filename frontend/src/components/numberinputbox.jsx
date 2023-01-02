@@ -21,14 +21,16 @@ const numberStyle = {
 function NumberInputBox(props) {
 
   let boxStyle = {
-    minWidth: "30px",
-    maxWidth: "40px",
-    minHeight: "25px",
-    maxHeight: "30px",
+    minWidth: "15px",
+    maxWidth: "15px",
+    minHeight: "15px",
+    maxHeight: "15px",
     alignItems: "center",
     justifyContent: "center",
-    margin: "10px",
-    padding: "17px",
+    margin: "5px",
+    marginTop: "20px",
+    marginBottom: "10px",
+    padding: "21px",
     display: "flex",
   }
 

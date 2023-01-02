@@ -24,7 +24,7 @@ function VictoryBoard(props) {
   return (
       <Grid container alignItems="center" justifyContent="center" style={containerDivStyle}>
         <Grid item xs={12}>
-          <InputTiles guessResult={["correct", "correct", "correct", "correct"]} guess={props.passcode}></InputTiles>
+          <InputTiles guessResult={["correct", "correct", "correct", "correct", "correct", "correct"]} guess={props.passcode}></InputTiles>
         </Grid>
         <Grid item xs={12}>
           <Card style={statisticsStyle}>

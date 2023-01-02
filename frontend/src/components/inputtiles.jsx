@@ -10,6 +10,8 @@ function InputTiles(props) {
       <NumberInputBox state={props.guessResult[1]} value={props.guess[1]}/>
       <NumberInputBox state={props.guessResult[2]} value={props.guess[2]}/>
       <NumberInputBox state={props.guessResult[3]} value={props.guess[3]}/>
+      <NumberInputBox state={props.guessResult[4]} value={props.guess[4]}/>
+      <NumberInputBox state={props.guessResult[5]} value={props.guess[5]}/>
     </Grid>
   );
 }

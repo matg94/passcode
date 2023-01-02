@@ -9,9 +9,9 @@ import VictoryBoard from './victoryBoard';
 
 function GameBoard(props) {
 
-  const [currentGuess, setCurrentGuess] = useState(["_", "_", "_", "_"])
+  const [currentGuess, setCurrentGuess] = useState(["_", "_", "_", "_", "_", "_"])
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [lastGuessResult, setLastGuessResult] = useState(["normal", "normal", "normal", "normal"])
+  const [lastGuessResult, setLastGuessResult] = useState(["normal", "normal", "normal", "normal", "normal", "normal"])
   const [showingLogs, setShowingLogs] = useState(false);
   const [lastFiveLogs, setLastFiveLogs] = useState([]);
   const [sessionID, setSessionID] = useState("");
@@ -67,14 +67,14 @@ function GameBoard(props) {
 
   
   const clearGuess = () => {
-    setCurrentGuess(["_", "_", "_", "_"])
+    setCurrentGuess(["_", "_", "_", "_", "_", "_"])
     setCurrentIndex(0)
-    setLastGuessResult((["normal", "normal", "normal", "normal"]))
+    setLastGuessResult((["normal", "normal", "normal", "normal", "normal", "normal"]))
   }
 
   const buttonOnClick = (value) => {
     if (value == "ok") {
-      if (currentIndex != 4) {
+      if (currentIndex != 6) {
         return
       }
       onSubmitGuess()
@@ -96,7 +96,7 @@ function GameBoard(props) {
       return
     }
 
-    if (currentIndex > 3) {
+    if (currentIndex > 5) {
       return
     }
 

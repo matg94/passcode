@@ -47,7 +47,7 @@ func PostCheckGuess(c *gin.Context) {
 	session.Guesses = append(session.Guesses, Code{Values: request.Guess})
 
 	result := CheckGuess(Code{Values: request.Guess}, session.Passcode)
-	if reflect.DeepEqual(result, []string{"correct", "correct", "correct", "correct"}) {
+	if reflect.DeepEqual(result, []string{"correct", "correct", "correct", "correct", "correct", "correct"}) {
 		session.Completed = true
 	}
 
