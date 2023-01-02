@@ -2,14 +2,15 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	fmt.Println("Hello")
-	tmpConn, err := NewMongoDBConnection("passcode", "passcode", "192.168.50.155")
+	databaseURL := os.Getenv("DATABASE_URL")
+	tmpConn, err := NewMongoDBConnection(databaseURL)
 	if err != nil {
 		panic(fmt.Sprintf("Could not connect to database: %s", err))
 	}

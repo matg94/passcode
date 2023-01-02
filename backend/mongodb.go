@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -17,11 +16,10 @@ type MongoDBConnection struct {
 	client *mongo.Client
 }
 
-func NewMongoDBConnection(username, password, baseUrl string) (*MongoDBConnection, error) {
-	url := fmt.Sprintf("mongodb://%s:%s@%s", username, password, baseUrl)
+func NewMongoDBConnection(databaseURL string) (*MongoDBConnection, error) {
 
 	// Set up the MongoDB client options.
-	clientOptions := options.Client().ApplyURI(url)
+	clientOptions := options.Client().ApplyURI(databaseURL)
 
 	// Connect to the MongoDB server.
 	client, err := mongo.Connect(context.TODO(), clientOptions)
